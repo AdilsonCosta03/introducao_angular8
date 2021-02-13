@@ -1,0 +1,45 @@
+<h2>Lista de cursos</h2>
+
+<div class="form-gruop row">
+  <label class="col-sm-2 col-form-label"> Filtrar Por</label>
+
+  <div class="col-sm-10">
+    <input [(ngModel)]="filtro" class="form-control" />
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Imagem</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Preço</th>
+      <th scope="col">Código</th>
+      <th scope="col">Duração</th>
+      <th scope="col">Reting</th>
+      <th scope="col">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let curso of cursosFiltrados">
+      <td>{{ curso.imagem }}</td>
+      <td>{{ curso.nome }}</td>
+      <td>{{ curso.preco }}</td>
+      <td>{{ curso.codigo | uppercase | replace: "-":" " }}</td>
+      <td>{{ curso.duracao }}</td>
+      <td>
+        <app-estrela [rating]="curso.rating"></app-estrela>
+      </td>
+      <td>
+        <a
+          [routerLink]="['/curso/detalhes', curso.id]"
+          class="btn btn-primary mr-2"
+          >Editar</a
+        >
+        <button (click)="removerPeloId(curso.id)" class="btn btn-danger">
+          Remover
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
